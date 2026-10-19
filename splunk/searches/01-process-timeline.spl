@@ -1,0 +1,1 @@
+index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-Sysmon" event_id=1 | eval UTC=utc, PID='data.ProcessId', ParentPID='data.ParentProcessId', Image='data.Image', CommandLine='data.CommandLine', ProcessGuid='data.ProcessGuid', ParentProcessGuid='data.ParentProcessGuid' | table UTC PID ParentPID Image CommandLine ProcessGuid ParentProcessGuid | sort 0 UTC

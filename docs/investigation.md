@@ -1,0 +1,49 @@
+# Investigation notes
+
+## Environment
+
+| Component | Configuration |
+| --- | --- |
+| Windows endpoint | `MOHAMEDAHMED`, Windows Server 2022 Evaluation |
+| Local account | `MOHAMEDAHMED\mohamedahmed` |
+| PowerShell | Windows PowerShell 5.1 |
+| Endpoint telemetry | Sysmon process, network and file events; Security 4688; PowerShell 4104 |
+| SIEM | Splunk Enterprise 9.4.1 on `MOHAMED-SIEM` |
+| Service address | `10.0.2.2:8766`, reachable only inside the lab |
+
+The Windows machine is standalone. The Linux VM hosts Splunk. All timestamps in the investigation are UTC.
+
+## Collected evidence
+
+The selected window is `2026-10-19T08:30:13.3510736Z` to `2026-10-19T08:35:26.8511287Z`. It contains **19 native Windows records**. The full selection is listed in [selection.json](../evidence/selection.json).
+
+| Provider | Event ID | Records |
+| --- | --- | ---: |
+| Microsoft-Windows-Security-Auditing | 4688 | 4 |
+| Microsoft-Windows-Sysmon | 1 | 4 |
+| Microsoft-Windows-PowerShell | 4104 | 4 |
+| Microsoft-Windows-Sysmon | 11 | 6 |
+| Microsoft-Windows-Sysmon | 3 | 1 |
+
+The normalized JSONL and original event XML identify the same channel/record-ID pairs. Event 4104 can be split into several parts; use its ScriptBlockId and part fields before interpreting long content. PID pivots are constrained to this host and time window, then checked against ProcessGuid.
+
+
+## Process and content pivots
+
+1. Start with [the process timeline](../evidence/search-results/01-process-timeline.csv), recording the computer, UTC time, PID, ProcessGuid and parent relationship.
+2. Isolate the two encoded launches using [the encoded-command search](../splunk/searches/02-encoded-commands.spl). Decode the argument as Base64-encoded UTF-16LE text without running it. The decoded values are in [run.json](../evidence/run.json).
+3. Compare the decoded text with [the recorded script blocks](../evidence/search-results/03-script-blocks.csv). A command-line flag does not describe everything a downloaded script can do.
+4. For the download case, follow the launcher to `check.ps1`, its child PowerShell process, the internal HTTP connection and `download-execution.json`.
+5. Compare the downloaded file's hash with [lab/check.ps1](../lab/check.ps1). `NotSigned` describes signature status; it does not by itself establish maliciousness.
+
+## Findings
+
+The two inventory cases write local inventory JSON. Encoding changes the launch representation, while the recorded script content still explains the behavior. The third case adds a download, a cached script and a second PowerShell process. Its local output records the executing PID and account.
+
+The three case processes start in the same lab session. The download launcher creates a separate PowerShell child to run the file. PID and ProcessGuid pivots connect the launcher, downloaded file, child process and output.
+
+FileCreate events may include directory creation as well as files. The dashboard excerpts are for reading; use the XML, JSONL and CSV exports for complete paths and command lines.
+
+## Triage decision
+
+The download-and-execute combination would justify escalation when it is unexpected on a real endpoint. Preserve the decoded command, source records, file hash, network destination and output, then assess scope and containment under the playbook. The two inventory controls show why encoding alone is insufficient to call an attack.

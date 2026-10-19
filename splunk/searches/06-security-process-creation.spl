@@ -1,0 +1,1 @@
+index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-Security-Auditing" event_id=4688 | eval UTC=utc, PID='data.NewProcessId', ParentPID='data.ProcessId', Image='data.NewProcessName', CommandLine='data.CommandLine' | table UTC PID ParentPID Image CommandLine | sort 0 UTC

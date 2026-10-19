@@ -1,0 +1,89 @@
+<dashboard version="1.1" theme="dark">
+  <label>PowerShell Execution Investigation</label>
+  <description>MOHAMEDAHMED | UTC</description>
+  <row>
+    <panel>
+      <title>Case process launches</title>
+      <single>
+        <search>
+          <query>index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-Sysmon" event_id=1 | stats count</query>
+          <earliest>0</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">0</option>
+        <option name="showTrendIndicator">0</option>
+        <option name="useColors">1</option>
+        <option name="colorMode">none</option>
+        <option name="rangeColors">["0x53a051"]</option>
+        <option name="rangeValues">[]</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Encoded command launches</title>
+      <single>
+        <search>
+          <query>index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-Sysmon" event_id=1 data.CommandLine="*-EncodedCommand*" | stats count</query>
+          <earliest>0</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">0</option>
+        <option name="showTrendIndicator">0</option>
+        <option name="useColors">1</option>
+        <option name="colorMode">none</option>
+        <option name="rangeColors">["0x53a051"]</option>
+        <option name="rangeValues">[]</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Script block events</title>
+      <single>
+        <search>
+          <query>index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-PowerShell" event_id=4104 | stats count</query>
+          <earliest>0</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">0</option>
+        <option name="showTrendIndicator">0</option>
+        <option name="useColors">1</option>
+        <option name="colorMode">none</option>
+        <option name="rangeColors">["0x53a051"]</option>
+        <option name="rangeValues">[]</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Execution timeline</title>
+      <table>
+        <search>
+          <query>index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-Sysmon" event_id=1 | eval UTC=substr(utc,12,12), PID='data.ProcessId', ParentPID='data.ParentProcessId', Command=substr('data.CommandLine',1,155) | table UTC PID ParentPID Command | sort 0 UTC</query>
+          <earliest>0</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">12</option>
+        <option name="drilldown">none</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Recorded script content</title>
+      <table>
+        <search>
+          <query>index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-PowerShell" event_id=4104 | eval UTC=substr(utc,12,12), PID=event_process_id, Script=substr(replace('data.ScriptBlockText',"[\r\n]+"," "),1,190) | table UTC PID Script | sort 0 UTC</query>
+          <earliest>0</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">12</option>
+        <option name="drilldown">none</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

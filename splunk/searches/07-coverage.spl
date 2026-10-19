@@ -1,0 +1,1 @@
+index=lab_powershell computer="MOHAMEDAHMED" | stats count by provider event_id | sort provider event_id
