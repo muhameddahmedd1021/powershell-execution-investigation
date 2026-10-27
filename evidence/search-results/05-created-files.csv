@@ -1,7 +1,7 @@
-UTC,PID,Image,File,ProcessGuid
-"2026-10-19T08:31:58.0472799Z",3328,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","C:\ProgramData\MohamedLab\PowerShell","{f4a656a0-d519-6ad5-aa00-000000000700}"
-"2026-10-19T08:32:18.8928265Z",3328,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","C:\ProgramData\MohamedLab\PowerShell\inventory.json","{f4a656a0-d519-6ad5-aa00-000000000700}"
-"2026-10-19T08:33:14.0946675Z",2296,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","C:\ProgramData\MohamedLab\PowerShell\encoded-inventory.json","{f4a656a0-d597-6ad5-ac00-000000000700}"
-"2026-10-19T08:34:02.5723497Z",2644,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","C:\Users\Public\Documents\MohamedLab\PowerShell\cache","{f4a656a0-d5cd-6ad5-ae00-000000000700}"
-"2026-10-19T08:34:12.0026711Z",2644,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","C:\Users\Public\Documents\MohamedLab\PowerShell\cache\check.ps1","{f4a656a0-d5cd-6ad5-ae00-000000000700}"
-"2026-10-19T08:35:17.2633062Z",2316,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","C:\ProgramData\MohamedLab\PowerShell\download-execution.json","{f4a656a0-d606-6ad5-b000-000000000700}"
+utc,data.Image,data.TargetFilename,record_id
+2026-10-19T08:31:58.0472799Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\ProgramData\MohamedLab\PowerShell,1492
+2026-10-19T08:32:18.8928265Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\ProgramData\MohamedLab\PowerShell\inventory.json,1493
+2026-10-19T08:33:14.0946675Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\ProgramData\MohamedLab\PowerShell\encoded-inventory.json,1499
+2026-10-19T08:34:02.5723497Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\Users\Public\Documents\MohamedLab\PowerShell\cache,1504
+2026-10-19T08:34:12.0026711Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\Users\Public\Documents\MohamedLab\PowerShell\cache\check.ps1,1505
+2026-10-19T08:35:17.2633062Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\ProgramData\MohamedLab\PowerShell\download-execution.json,1509

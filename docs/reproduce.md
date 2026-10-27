@@ -18,7 +18,7 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
 ## Run the cases
 
-Copy the inventory files to `C:\Users\Public\Documents\MohamedLab\PowerShell`. Serve `lab/check.ps1` at `/powershell/check.ps1` from an internal HTTP server. For QEMU user networking the host service is `10.0.2.2`; use your own internal address if the topology differs.
+Copy the inventory files to `C:\Users\Public\Documents\MohamedLab\PowerShell`. Serve `lab/check.ps1` at `/powershell/check.ps1` from an internal HTTP server. The recorded internal HTTP service was `10.0.2.2:8766`; use the address of your own lab service when reproducing the case.
 
 ```powershell
 $root='C:\Users\Public\Documents\MohamedLab\PowerShell'

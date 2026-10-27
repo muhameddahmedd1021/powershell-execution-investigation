@@ -2,11 +2,13 @@
 
 | File | Contents |
 | --- | --- |
-| [events.xml](events.xml) | Original Windows event XML for the selected channel/record IDs |
+| [events.xml](events.xml) | Original Windows XML for the selected channel and record IDs |
 | [events.jsonl](events.jsonl) | The same events normalized for Splunk |
-| [selection.json](selection.json) | Time window, included PIDs, event counts and record IDs |
-| [run.json](run.json) | Actual launch parameters and UTC execution window |
-| [outputs](outputs/) | Files written by the case processes |
-| [search results](search-results/) | Actual CSV exports from Splunk |
+| [selection.json](selection.json) | UTC window, included PIDs, counts and record IDs |
+| [run.json](run.json) | Launch arguments, decoded commands and execution times |
+| [outputs](outputs/) | Original files written by the three cases |
+| [search results](search-results/) | Tables read from the completed Splunk searches |
 
-Screenshots in `images` show the native Windows console and a native Splunk dashboard export. The source records and CSV files retain more detail than a single image can display.
+The [search guide](../docs/search-guide.md) links each query to its result table and screenshot. Windows screenshots show the preserved script's properties, its content in Notepad and the saved output. The hash/signature inspection and dashboard provide supporting views.
+
+Source timestamps describe the October 19 run. The XML, JSONL and original case outputs remain the source evidence.

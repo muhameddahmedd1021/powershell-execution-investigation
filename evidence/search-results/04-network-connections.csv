@@ -1,2 +1,2 @@
-UTC,PID,Image,Destination,Port,ProcessGuid
-"2026-10-19T08:34:13.6993129Z",2644,"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","10.0.2.2",8766,"{f4a656a0-d5cd-6ad5-ae00-000000000700}"
+utc,data.Image,data.DestinationIp,data.DestinationPort,record_id
+2026-10-19T08:34:13.6993129Z,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,10.0.2.2,8766,1506

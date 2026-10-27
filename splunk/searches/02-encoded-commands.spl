@@ -1,1 +1,4 @@
-index=lab_powershell computer="MOHAMEDAHMED" provider="Microsoft-Windows-Sysmon" event_id=1 data.CommandLine="*-EncodedCommand*" | eval UTC=utc, PID='data.ProcessId', CommandLine='data.CommandLine' | rex field=CommandLine "(?i)-EncodedCommand\s+(?<EncodedCommand>[A-Za-z0-9+/=]+)" | table UTC PID EncodedCommand CommandLine | sort 0 UTC
+index=lab_powershell computer=MOHAMEDAHMED provider="Microsoft-Windows-Sysmon" event_id=1 earliest=0
+ data.CommandLine="*-EncodedCommand*"
+| sort 0 utc
+| table utc data.ProcessId data.Image record_id

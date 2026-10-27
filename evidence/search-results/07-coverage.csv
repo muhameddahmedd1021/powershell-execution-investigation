@@ -1,6 +1,6 @@
-provider,"event_id",count
-"Microsoft-Windows-PowerShell",4104,4
-"Microsoft-Windows-Security-Auditing",4688,4
-"Microsoft-Windows-Sysmon",1,4
-"Microsoft-Windows-Sysmon",3,1
-"Microsoft-Windows-Sysmon",11,6
+provider,event_id,count
+Microsoft-Windows-PowerShell,4104,4
+Microsoft-Windows-Security-Auditing,4688,4
+Microsoft-Windows-Sysmon,1,4
+Microsoft-Windows-Sysmon,11,6
+Microsoft-Windows-Sysmon,3,1

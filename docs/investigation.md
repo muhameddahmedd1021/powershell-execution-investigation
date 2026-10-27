@@ -30,7 +30,7 @@ The normalized JSONL and original event XML identify the same channel/record-ID 
 
 ## Process and content pivots
 
-1. Start with [the process timeline](../evidence/search-results/01-process-timeline.csv), recording the computer, UTC time, PID, ProcessGuid and parent relationship.
+1. Start with [the process timeline](../evidence/search-results/01-process-timeline.csv), recording UTC time, PID and parent PID. Use the original events for ProcessGuid and full command lines.
 2. Isolate the two encoded launches using [the encoded-command search](../splunk/searches/02-encoded-commands.spl). Decode the argument as Base64-encoded UTF-16LE text without running it. The decoded values are in [run.json](../evidence/run.json).
 3. Compare the decoded text with [the recorded script blocks](../evidence/search-results/03-script-blocks.csv). A command-line flag does not describe everything a downloaded script can do.
 4. For the download case, follow the launcher to `check.ps1`, its child PowerShell process, the internal HTTP connection and `download-execution.json`.
@@ -42,8 +42,22 @@ The two inventory cases write local inventory JSON. Encoding changes the launch 
 
 The three case processes start in the same lab session. The download launcher creates a separate PowerShell child to run the file. PID and ProcessGuid pivots connect the launcher, downloaded file, child process and output.
 
-FileCreate events may include directory creation as well as files. The dashboard excerpts are for reading; use the XML, JSONL and CSV exports for complete paths and command lines.
+FileCreate events may include directory creation as well as files. The dashboard excerpts are for reading; use the original XML and JSONL for full command lines and process identifiers.
 
 ## Triage decision
 
 The download-and-execute combination would justify escalation when it is unexpected on a real endpoint. Preserve the decoded command, source records, file hash, network destination and output, then assess scope and containment under the playbook. The two inventory controls show why encoding alone is insufficient to call an attack.
+
+## File checks
+
+[Windows file properties](../images/windows-file-properties.jpg) show the cached script, while [Notepad](../images/windows-script-inspection.jpg) shows its content without running it. The [saved output](../images/windows-output-inspection.jpg) matches the published output file.
+
+The hash and signature check uses `Get-FileHash` and `Get-AuthenticodeSignature`:
+
+![Hash and signature inspection](../images/windows-downloaded-file.png)
+
+## Dashboard
+
+The overview groups the same evidence into case counts, process launches and script content. Its display expressions shorten long text; the saved searches and source files retain the full values.
+
+![Splunk overview](../images/splunk-overview.png)

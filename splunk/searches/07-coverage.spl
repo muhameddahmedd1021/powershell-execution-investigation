@@ -1,1 +1,2 @@
-index=lab_powershell computer="MOHAMEDAHMED" | stats count by provider event_id | sort provider event_id
+index=lab_powershell computer=MOHAMEDAHMED earliest=0
+| stats count by provider event_id
