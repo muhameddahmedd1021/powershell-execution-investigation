@@ -9,6 +9,6 @@
 | [outputs](outputs/) | Original files written by the three cases |
 | [search results](search-results/) | Tables read from the completed Splunk searches |
 
-The [search guide](../docs/search-guide.md) links each query to its result table and screenshot. Windows screenshots show the preserved script's properties, its content in Notepad and the saved output. The hash/signature inspection and dashboard provide supporting views.
+The [search guide](../docs/search-guide.md) links each query to its result table and screenshot. Windows screenshots show the recorded process relationships, the three saved case outputs, the downloaded script's properties, and its hash/signature results. The Search UI tables and source records support the investigation timeline.
 
 Source timestamps describe the October 19 run. The XML, JSONL and original case outputs remain the source evidence.

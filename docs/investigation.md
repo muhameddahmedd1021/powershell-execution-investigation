@@ -40,7 +40,9 @@ The normalized JSONL and original event XML identify the same channel/record-ID 
 
 The two inventory cases write local inventory JSON. Encoding changes the launch representation, while the recorded script content still explains the behavior. The third case adds a download, a cached script and a second PowerShell process. Its local output records the executing PID and account.
 
-The three case processes start in the same lab session. The download launcher creates a separate PowerShell child to run the file. PID and ProcessGuid pivots connect the launcher, downloaded file, child process and output.
+The recorded launchers have wsmprovhost.exe as their parent. The download launcher then creates a separate PowerShell child to run the file. PID and ProcessGuid pivots connect the launcher, downloaded file, child process and output.
+
+![Recorded process relationships](../images/windows-processes.png)
 
 FileCreate events may include directory creation as well as files. The dashboard excerpts are for reading; use the original XML and JSONL for full command lines and process identifiers.
 
@@ -50,7 +52,9 @@ The download-and-execute combination would justify escalation when it is unexpec
 
 ## File checks
 
-[Windows file properties](../images/windows-file-properties.jpg) show the cached script, while [Notepad](../images/windows-script-inspection.jpg) shows its content without running it. The [saved output](../images/windows-output-inspection.jpg) matches the published output file.
+[Windows file properties](../images/windows-file-properties.jpg) show the cached script. Read the [sample source](../lab/check.ps1) alongside the recorded 4104 events. The PowerShell output view displays the original inventory and download-case results.
+
+![Recorded case outputs](../images/windows-output.png)
 
 The hash and signature check uses `Get-FileHash` and `Get-AuthenticodeSignature`:
 

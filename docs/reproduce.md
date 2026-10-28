@@ -4,17 +4,15 @@ Use an isolated Windows VM with Windows PowerShell 5.1 and Sysmon, plus a separa
 
 ## Telemetry
 
-Apply [sysmon-projects.xml](../lab/sysmon-projects.xml) to the installed Sysmon service:
+Enable successful Process Creation auditing in Local Security Policy. In Local Group Policy, enable process command-line inclusion and PowerShell Script Block Logging before opening the case processes.
+
+Apply [sysmon-projects.xml](../lab/sysmon-projects.xml) to the installed Sysmon service using its configuration command:
 
 ```powershell
 C:\Lab\Sysmon64.exe -c .\lab\sysmon-projects.xml
-auditpol /set /subcategory:"Process Creation" /success:enable
-New-Item HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Force
-Set-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging EnableScriptBlockLogging 1
-Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit ProcessCreationIncludeCmdLine_Enabled 1
 ```
 
-`-c` updates an installed Sysmon instance. On a new endpoint, install Sysmon first using its `-i` configuration option. Enable auditing before opening the PowerShell processes used for the cases.
+`-c` updates an installed Sysmon instance. On a new endpoint, install Sysmon first using its `-i` configuration option. Check the relevant Security, Sysmon and PowerShell channels in Event Viewer before running the cases.
 
 ## Run the cases
 
