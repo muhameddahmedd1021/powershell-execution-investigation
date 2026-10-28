@@ -48,7 +48,11 @@ FileCreate events may include directory creation as well as files. The dashboard
 
 ## Triage decision
 
-The download-and-execute combination would justify escalation when it is unexpected on a real endpoint. Preserve the decoded command, source records, file hash, network destination and output, then assess scope and containment under the playbook. The two inventory controls show why encoding alone is insufficient to call an attack.
+The download case confirms execution of the safe payload: launcher PID 2644 retrieved `check.ps1`, child PowerShell PID 2316 ran it, and `download-execution.json` recorded that child PID and account. The downloaded script creates an output directory and writes a local execution marker. These observations establish the simulated download-and-execute behavior.
+
+The inventory comparisons completed without that download/child-execution chain. One also used encoding, so the encoded-command match is a starting point for reading the command rather than the final verdict.
+
+An unexpected occurrence of the download chain on a real endpoint would justify escalation with the decoded command, original records, file hash, destination and affected account. Scoping and containment are response recommendations, separate from the executed lab cases.
 
 ## File checks
 

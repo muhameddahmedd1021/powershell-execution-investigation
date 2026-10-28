@@ -1,6 +1,6 @@
 # PowerShell Execution Investigation
 
-Tracing three PowerShell cases in Splunk: local inventory, encoded inventory, and an encoded launcher that downloads and runs a harmless lab script.
+Investigating a simulated PowerShell download-and-execute chain in Splunk, with ordinary and encoded inventory runs as comparisons.
 
 The investigation follows the command line, script content, process relationships, connection and output. Encoding and a hidden window are leads to examine alongside that evidence.
 
@@ -45,6 +45,14 @@ Windows properties show the cached script's location, type and 447-byte size.
 Its SHA256 matches the supplied [check.ps1 sample](lab/check.ps1): `634266e42d9ac4732db2130198f227f08fa79888cedf7b48bce4b7f5f239bb0d`. The signature check reports `NotSigned`; that result is assessed with the script's content and behavior.
 
 ![Hash and signature results in Windows PowerShell](images/windows-downloaded-file.png)
+
+## Investigation outcome
+
+**The download case retrieved `check.ps1` and executed it in child PowerShell PID 2316.** Its local result file records the same PID, account, computer and execution time. The script creates its output folder and writes `download-execution.json`; this is the harmless payload used to verify execution.
+
+The decoded launch text, recorded script content, downloaded-file hash, process relationship and output establish the chain together. Both inventory comparisons also completed, including the encoded one. Their results show why an encoded command needs investigation of its content and behavior.
+
+For an unexpected occurrence on a real endpoint, preserve those records and scope the source destination, file hash and affected account before the response handoff. The lab evidence demonstrates download and execution; response actions are recommendations.
 
 ## Project files
 
